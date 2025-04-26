@@ -170,7 +170,7 @@ st.markdown(
         background-position: center;
         background-repeat: no-repeat;
         background-attachment: fixed;
-        # opacity: 0.5;
+        opacity: 0.8;
         position: absolute;
         top: 0;
         left: 0;
@@ -178,6 +178,27 @@ st.markdown(
         bottom: 0;
         z-index: -1;
     }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+# sidebar_bg = ""  # Web URL
+sidebar_bg = "https://img.freepik.com/free-vector/gold-frame-white-leather-background_53876-100845.jpg?ga=GA1.1.1723497080.1745686851&semt=ais_hybrid&w=740"  # Web URL
+
+st.markdown(
+    f"""
+    <style>
+    [data-testid="stSidebar"] > div:first-child {{
+        background-image: url("{sidebar_bg}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        color:white; 
+        text-shadow: 0.3px 0.3px 0.3px white,0.6px 0.6px 1px black;
+
+        
+    }}
     </style>
     """,
     unsafe_allow_html=True
