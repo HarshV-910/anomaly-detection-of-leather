@@ -1,163 +1,3 @@
-# import streamlit as st
-# import tensorflow as tf
-# import numpy as np
-# from keras.models import load_model  # TensorFlow is required for Keras to work
-# from PIL import Image, ImageOps  # Install pillow instead of PIL
-
-# #Tensorflow Model Prediction
-# def model_prediction(test_image):
-#     model = tf.keras.models.load_model("trained_plant_disease_model.keras")
-#     image = tf.keras.preprocessing.image.load_img(test_image,target_size=(128,128))
-#     input_arr = tf.keras.preprocessing.image.img_to_array(image)
-#     input_arr = np.array([input_arr]) #convert single image to batch
-#     predictions = model.predict(input_arr)
-#     return np.argmax(predictions) #return index of max element
-
-
-# def predict_image(test_image):
-#     # Disable scientific notation for clarity
-#     np.set_printoptions(suppress=True)
-
-#     # Load the model
-#     model = load_model("keras_model.h5", compile=False)
-
-#     # Load the labels
-#     class_names = open("labels.txt", "r").readlines()
-
-#     # Create the array of the right shape to feed into the keras model
-#     # The 'length' or number of images you can put into the array is
-#     # determined by the first position in the shape tuple, in this case 1
-#     data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
-
-#     # Replace this with the path to your image
-#     image = Image.open("test_image").convert("RGB")
-
-#     # resizing the image to be at least 224x224 and then cropping from the center
-#     size = (224, 224)
-#     image = ImageOps.fit(image, size, Image.Resampling.LANCZOS)
-
-#     # turn the image into a numpy array
-#     image_array = np.asarray(image)
-
-#     # Normalize the image
-#     normalized_image_array = (image_array.astype(np.float32) / 127.5) - 1
-
-#     # Load the image into the array
-#     data[0] = normalized_image_array
-
-#     # Predicts the model
-#     prediction = model.predict(data)
-#     index = np.argmax(prediction)
-#     class_name = class_names[index]
-#     confidence_score = prediction[0][index]
-
-#     # Print prediction and confidence score
-#     print("Class:", class_name[2:], end="")
-#     print("Confidence Score:", confidence_score)
-
-
-
-
-# #Sidebar
-# st.sidebar.title("Dashboard")
-# app_mode = st.sidebar.selectbox("Select Page",["Home","About","Disease Recognition"])
-
-# #Main Page
-# if(app_mode=="Home"):
-#     st.header("Marble Surface Anomaly Detection")
-#     st.header(tf.__version__)
-#     image_path = "https://imgs.search.brave.com/plgifbgjzYCmb74OLcLVoIHMOewTDvmN448BuZM4qtw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy85/LzkyL01hcmJsZV93/YWxsX29mX1J1c2tl/YWxhLmpwZw"
-#     st.image(image_path)
-#     st.markdown("""
-
-# ## 🏛️ What is Marble Surface Anomaly Detection?
-
-# It’s a **computer vision-based inspection task** where the goal is to automatically detect defects or anomalies on marble surfaces (tiles, slabs, or other products). These defects can include:
-# - **Cracks**
-# - **Stains**
-# - **Color inconsistency**
-# - **Spots**
-# - **Holes**
-# - **Vein pattern irregularities**
-# - **Surface roughness**
-
-# Since marble is a **natural material**, every slab has a unique pattern — which makes anomaly detection a challenging task because you need to differentiate between natural variations and actual defects.
-
-# ---
-
-# ## 📦 Types of Defects Typically Detected:
-# | Type         | Description                        |
-# |:------------|:-----------------------------------|
-# | Cracks       | Thin lines or breaks               |
-# | Holes        | Small missing parts in surface     |
-# | Stains       | Discolorations of varying shades   |
-# | Dark Spots   | Unusual darker patches             |
-# | Pattern Breaks | Discontinuity in expected patterns |
-
-# ---
-
-# ## 🖥️ How is it Done?
-
-# ### 1️⃣ Traditional Computer Vision:
-# - **Image acquisition** (camera or scanner)
-# - **Preprocessing**: filtering, denoising, contrast enhancement
-# - **Edge detection** (Canny, Sobel)
-# - **Texture analysis**: GLCM (Gray Level Co-occurrence Matrix), LBP (Local Binary Patterns)
-# - **Thresholding and segmentation**
-# - **Contour detection** to isolate defective regions
-
-# ---
-
-# ### 2️⃣ Machine Learning-based:
-# - Extract handcrafted features (texture, color histograms, shape descriptors)
-# - Train classifiers like:
-#   - SVM
-#   - Random Forest
-#   - k-NN
-# - On labeled defective/non-defective patches
-
-# ---
-
-# ### 3️⃣ Deep Learning-based (State-of-the-Art 🔥)
-# - Use **Convolutional Neural Networks (CNNs)** for automated feature extraction
-# - Techniques:
-#   - **Image classification CNNs**: classify entire tile as defective / non-defective
-#   - **Object detection CNNs** (YOLO, Faster R-CNN): locate defect regions
-#   - **Anomaly detection autoencoders**: detect abnormal regions by reconstruction error
-#   - **Segmentation CNNs** (like U-Net): pixel-wise detection of defects
-
-
-#     """)
-
-# #About Project
-# elif(app_mode=="About"):
-#     st.header("About")
-#     st.markdown("""
-#                 #### About Dataset
-#                 Context
-#                 Marble Surface Anomaly Detection dataset is a raw dataset that the user can mould in any form that deems fit to the work. The images are taken as they will be in the real industrial setup.
-#                 A smartphone camera is used to capture the images.
-#                 I will soon put a more comprehensive dataset that can be directly consumed by the models
-
-#                 Content
-#                 The images are **2218 x 4608** in dimension. Currently, there are only two folders good and defect.
-
-#                 """)
-
-# #Prediction Page
-# elif(app_mode=="Disease Recognition"):
-#     st.header("Disease Recognition")
-#     test_image = st.file_uploader("Choose an Image:")
-#     if(st.button("Show Image")):
-#         st.image(test_image)
-#     #Predict button
-#     if(st.button("Predict")):
-#         st.snow()
-#         st.write("Our Prediction")
-#         # result_index = model_prediction(test_image)
-#         predict_image(test_image)
-
-
 import streamlit as st
 import tensorflow as tf
 import numpy as np
@@ -208,33 +48,116 @@ def predict_image_tflite(image_file):
 
 # Sidebar
 st.sidebar.title("Dashboard")
-app_mode = st.sidebar.selectbox("Select Page", ["Home", "About", "Disease Recognition"])
+app_mode = st.sidebar.selectbox("Select Page", ["Home", "About Data", "Leather Anomaly Detection"])
 
 # Main Page
 if app_mode == "Home":
     st.header("Marble Surface Anomaly Detection")
     st.header(tf.__version__)
-    st.image("https://imgs.search.brave.com/plgifbgjzYCmb74OLcLVoIHMOewTDvmN448BuZM4qtw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy85/LzkyL01hcmJsZV93/YWxsX29mX1J1c2tl/YWxhLmpwZw")
+    st.image("https://imgs.search.brave.com/eBvLVlfi8-X1GfzPxRWQ84WwsUpwsCkRFfYxKYTAZOg/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/c2hvcGlmeS5jb20v/cy9maWxlcy8xLzAw/MjkvMDM5Ni81NzYw/L2ZpbGVzLzFfMTEx/MTFmYTEtOWY1OC00/OGNhLTliNDYtM2U2/MDkyYzJmNzVjXzEw/MjR4MTAyNC5wbmc_/dj0xNjIyMjE3MzY3")
     st.markdown("""
-        ## 🏛️ What is Marble Surface Anomaly Detection?
-        It’s a **computer vision-based inspection task** for detecting defects or anomalies on marble surfaces.
+        Awesome — you’re tackling a meaningful and highly practical computer vision problem! Let’s lay out a clean overview for your **Leather Anomaly Detection in Manufacturing** project. You can use this in your documentation, Streamlit app, or report:
+
+---
+
+## 📌 Leather Anomaly Detection in Manufacturing
+
+### 📖 Project Overview:
+In leather manufacturing industries, ensuring the quality of leather products is critical. Defects like color inconsistencies, physical damages, or improper processing can affect product quality and market value. This project automates the **visual inspection process** by using **computer vision and deep learning** techniques to detect different types of surface anomalies in leather products.
+
+---
+
+### 🎯 Objective:
+To build an automated system that can classify leather images into various categories based on surface conditions, improving inspection efficiency and reducing manual errors.
+
+---
+
+
+### 🔍 Importance:
+- Reduces dependency on manual inspection.
+- Minimizes faulty deliveries.
+- Ensures consistent product quality.
+- Helps in early detection of process errors.
+- Speeds up the quality control workflow.
+
         """)
     
-elif app_mode == "About":
-    st.header("About")
+elif app_mode == "About Data":
+    st.header("About Data")
     st.markdown("""
-        #### About Dataset
-        Marble Surface Anomaly Detection dataset mimics real industrial setups, captured via smartphone camera.
-        Images are **2218 x 4608** and classified into `good` and `defect`.
+        Excellent — let’s flesh out a proper **Dataset Description** section for your Leather Anomaly Detection project. You can use this in your report, documentation, or Streamlit app as well.
+
+---
+
+## 📚 Dataset Description: Leather Anomaly Detection
+
+### 📖 Context:
+In leather manufacturing industries, visual inspection is a critical quality control step. Manual inspection, however, can be **inconsistent, time-consuming, and prone to human error**. To address this, we curated a dataset of high-resolution leather surface images, categorized into multiple defect classes typically encountered during the manufacturing process.
+
+---
+
+### 📊 Dataset Structure:
+The dataset is organized into **6 distinct classes** representing different types of surface conditions:
+
+| Class   | Description                                     | Example Issues                        |
+|:--------|:------------------------------------------------|:--------------------------------------|
+| **Color**  | Irregular color patches, discoloration         | Faded spots, uneven tanning            |
+| **Cut**    | Visible cuts, tears, or slits on the surface    | Knife cuts, accidental slashes        |
+| **Poke**   | Small holes or puncture defects                | Needle holes, sharp object pokes      |
+| **Good**   | Defect-free, high-quality leather surfaces     | Smooth, consistent texture and color  |
+| **Fold**   | Wrinkles or folds in the leather               | Creases from handling or storage      |
+| **Glue**   | Visible glue stains or adhesive marks          | Processing adhesive residues          |
+
+---
+
+### 🖼️ Image Details:
+- **Image Dimensions**: Variable (e.g., 128x128, 224x224) depending on preprocessing.
+- **Image Type**: RGB images captured using high-resolution cameras in industrial setups.
+- **Format**: JPEG / PNG.
+
+---
+
+### 📂 Dataset Directory Structure:
+```
+/leather_anomalies_dataset/
+ ├── color/
+ │    ├── img1.jpg
+ │    ├── img2.jpg
+ │    └── ...
+ ├── cut/
+ ├── poke/
+ ├── good/
+ ├── fold/
+ └── glue/
+```
+
+---
+
+### 📑 Dataset Purpose:
+- Train, validate, and test deep learning models for image classification.
+- Develop automated anomaly detection systems for leather manufacturing.
+- Benchmark different CNN architectures and preprocessing techniques.
+
+---
+
+### 📊 Possible Future Extensions:
+- **Add more defect classes**: (e.g., stain, scratch, burn mark)
+- **Pixel-wise defect segmentation** for localization.
+- **Anomaly detection using autoencoders** for unseen defect types.
+
+---
+
+Would you like a sample `.csv` label file structure too (if you’re managing labels via a CSV for your pipeline)? I can draft that too if needed!
+
         """)
 
-elif app_mode == "Disease Recognition":
-    st.header("Disease Recognition")
+elif app_mode == "Leather Anomaly Detection":
+    st.header("Leather Anomaly Detection")
     test_image = st.file_uploader("Upload an Image", type=["jpg", "jpeg", "png"])
 
     if test_image is not None:
         if st.button("Show Image"):
-            st.image(test_image, use_column_width=True)
+            st.image(test_image, use_container_width=True)
 
         if st.button("Predict"):
             st.snow()
