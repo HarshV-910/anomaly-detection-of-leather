@@ -184,7 +184,7 @@ st.markdown(
 )
 
 # sidebar_bg = ""  # Web URL
-sidebar_bg = "https://img.freepik.com/free-vector/gold-frame-white-leather-background_53876-100845.jpg?ga=GA1.1.1723497080.1745686851&semt=ais_hybrid&w=740"  # Web URL
+sidebar_bg = "https://img.freepik.com/free-vector/black-leather-texture_1048-1036.jpg?t=st=1745687056~exp=1745690656~hmac=97ebe4943f2b4192a079ca64ab5d91938dff33a80e7116277a745209e3f3d11c&w=740"  # Web URL
 
 st.markdown(
     f"""
