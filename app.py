@@ -56,9 +56,6 @@ if app_mode == "Home":
     st.header(tf.__version__)
     st.image("https://imgs.search.brave.com/eBvLVlfi8-X1GfzPxRWQ84WwsUpwsCkRFfYxKYTAZOg/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/c2hvcGlmeS5jb20v/cy9maWxlcy8xLzAw/MjkvMDM5Ni81NzYw/L2ZpbGVzLzFfMTEx/MTFmYTEtOWY1OC00/OGNhLTliNDYtM2U2/MDkyYzJmNzVjXzEw/MjR4MTAyNC5wbmc_/dj0xNjIyMjE3MzY3")
     st.markdown("""
-        Awesome — you’re tackling a meaningful and highly practical computer vision problem! Let’s lay out a clean overview for your **Leather Anomaly Detection in Manufacturing** project. You can use this in your documentation, Streamlit app, or report:
-
----
 
 ## 📌 Leather Anomaly Detection in Manufacturing
 
@@ -85,9 +82,6 @@ To build an automated system that can classify leather images into various categ
 elif app_mode == "About Data":
     st.header("About Data")
     st.markdown("""
-        Excellent — let’s flesh out a proper **Dataset Description** section for your Leather Anomaly Detection project. You can use this in your report, documentation, or Streamlit app as well.
-
----
 
 ## 📚 Dataset Description: Leather Anomaly Detection
 
@@ -145,10 +139,6 @@ The dataset is organized into **6 distinct classes** representing different type
 - **Pixel-wise defect segmentation** for localization.
 - **Anomaly detection using autoencoders** for unseen defect types.
 
----
-
-Would you like a sample `.csv` label file structure too (if you’re managing labels via a CSV for your pipeline)? I can draft that too if needed!
-
         """)
 
 elif app_mode == "Leather Anomaly Detection":
@@ -174,7 +164,7 @@ st.markdown(
     """
     <style>
     .stApp {
-        background-image: url("https://images.unsplash.com/photo-1563832528262-15e2bca87584?q=80&w=2019&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+        background-image: url("https://img.freepik.com/free-photo/leather-texture-background_1385-1128.jpg?semt=ais_hybrid&w=740");
         # background-image: url("https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
         background-size: cover;
         background-position: center;
